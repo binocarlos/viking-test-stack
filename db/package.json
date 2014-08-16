@@ -1,0 +1,11 @@
+{
+  "name": "viking-test-stack-db",
+  "private": true,
+  "version": "0.0.1",
+  "description": "db service for viking test stack",
+  "main": "index.js",
+  "dependencies": {
+    "routes-router": "^4.1.0"
+  },
+  "devDependencies": {}
+}
