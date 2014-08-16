@@ -15,14 +15,14 @@ function logicAddress(){
 }
 
 function loadNumbers(done){
-	var req = hyperquest(dbAddress() + '/load').pipe(concat(result){
+	var req = hyperquest(dbAddress() + '/load').pipe(concat(function(result){
 		done(null, JSON.parse(result.toString()))
 	}))
 	req.on('error', done)
 }
 
 function calcNumbers(operator, a, b, done){
-	var req = hyperquest(logicAddress() + '/' + operator + '/' + a + '/' + b).pipe(concat(result){
+	var req = hyperquest(logicAddress() + '/' + operator + '/' + a + '/' + b).pipe(concat(function(result){
 		done(null, result.toString())
 	}))
 	req.on('error', done)
@@ -37,7 +37,14 @@ router.addRoute('/add', function(req, res){
 			res.end(err)
 			return
 		}
-		calcNumbers('add', numbers.a, numbers.b)
+		calcNumbers('add', numbers.a, numbers.b, function(err, result){
+			if(err){
+				res.statusCode = 500
+				res.end(err)
+				return
+			}
+			res.end(result.toString())
+		})
 	})
 })
 
@@ -50,7 +57,14 @@ router.addRoute('/minus', function(req, res, opts){
 			res.end(err)
 			return
 		}
-		calcNumbers('minus', numbers.a, numbers.b)
+		calcNumbers('minus', numbers.a, numbers.b, function(err, result){
+			if(err){
+				res.statusCode = 500
+				res.end(err)
+				return
+			}
+			res.end(result.toString())
+		})
 	})
 })
 

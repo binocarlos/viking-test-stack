@@ -5,6 +5,8 @@
   "description": "web service for viking test stack",
   "main": "index.js",
   "dependencies": {
+    "concat-stream": "^1.4.6",
+    "hyperquest": "^0.3.0",
     "routes-router": "^4.1.0"
   },
   "devDependencies": {}

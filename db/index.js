@@ -38,6 +38,7 @@ router.addRoute('/load', function(req, res, opts){
 				res.end(err)
 				return
 			}
+			res.end(JSON.stringify(data))
 		})
 	})
 })

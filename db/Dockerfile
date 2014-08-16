@@ -7,5 +7,6 @@ RUN cd /srv/app && npm install
 EXPOSE 80
 VOLUME /data
 
+WORKDIR /srv/app
 ENTRYPOINT ["node", "index.js"]
 CMD [""]
