@@ -1,0 +1,11 @@
+{
+  "name": "viking-test-stack-logic",
+  "private": true,
+  "version": "0.0.1",
+  "description": "logic service for viking test stack",
+  "main": "index.js",
+  "dependencies": {
+    "routes-router": "^4.1.0"
+  },
+  "devDependencies": {}
+}
