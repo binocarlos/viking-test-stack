@@ -15,16 +15,28 @@ function logicAddress(){
 }
 
 function loadNumbers(done){
-	var req = hyperquest(dbAddress() + '/load').pipe(concat(function(result){
-		done(null, JSON.parse(result.toString()))
-	}))
+	var req = hyperquest(dbAddress() + '/load')
+	req.on('response', function(res){
+		if(res.statusCode!=200){
+			return done('error code: ' + res.statusCode)
+		}
+		res.pipe(concat(function(result){
+			done(null, JSON.parse(result.toString()))
+		}))
+	})
 	req.on('error', done)
 }
 
 function calcNumbers(operator, a, b, done){
-	var req = hyperquest(logicAddress() + '/' + operator + '/' + a + '/' + b).pipe(concat(function(result){
-		done(null, result.toString())
-	}))
+	var req = hyperquest(logicAddress() + '/' + operator + '/' + a + '/' + b)
+		req.on('response', function(res){
+		if(res.statusCode!=200){
+			return done('error code: ' + res.statusCode)
+		}
+		res.pipe(concat(function(result){
+			done(null, result.toString())
+		}))
+	})
 	req.on('error', done)
 }
 
